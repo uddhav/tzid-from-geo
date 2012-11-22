@@ -2,6 +2,7 @@ tzid-from-geo
 =============
 
 Get the timezone ID from latitude, longitude coordinates
+Demo at http://tzid.kambli.net/?lng=-71.063611&lat=42.358056. This may go down because it's a free Google App Engine webapp.
 
 I developed this during a few hours long hackathon, which means that it's quickly put together and can be optimized a lot. It has two scripts - construct_data.py and find_timezone.py. They are fairly self-explanatory. Feel free to fork and use in any way that you see fit. 
 
