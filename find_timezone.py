@@ -64,7 +64,7 @@ _maxLongitude = 180
 # Set level of detail for the final data set
 # trade-off between size and number of polygons to test
 # Decides the tiles-{_level}.json
-_level = 10
+_level = 11
 
 # Clips a number to the specified minimum and maximum values.
 def _clip(num, minValue, maxValue):
@@ -164,9 +164,10 @@ border_pk = [ 70.988159, 24.717893 ]
 border_in = [ 71.052704, 24.619804 ]
 port_moresby = [ 151.994629, -4.512337 ]
 caracas_vz = [ -66.916667, 10.5 ]
+cape_canaveral = [ -80.6058589, 28.4051872 ]
 
 # Location array
-pos = [ caracas_vz, boston_ma, kentland_in, carrolton_tx, hoover_dam, mumbai_in, quincy_ma, pune_in, border_pk, border_in, port_moresby ]
+pos = [ caracas_vz, cape_canaveral, boston_ma, kentland_in, carrolton_tx, hoover_dam, mumbai_in, quincy_ma, pune_in, border_pk, border_in, port_moresby ]
 
 # Find all timezones
 for p in pos:
@@ -179,8 +180,11 @@ for p in pos:
     tileX, tileY = _pixelXYToTileXY(pixelX, pixelY)
     tIndex = str(tileX * (2 << _level) + tileY)
 
+
     if tIndex in tiles:
         polygon_indices = tiles[tIndex]
+
+        np = len(polygon_indices)
 
         for polygon_index in polygon_indices:
             polygon = polygons[polygon_index]
@@ -188,7 +192,7 @@ for p in pos:
 
             ln = len(polygon)
 
-            if ln == 1 or is_point_inside(p, polygon, ln):
+            if np == 1 or is_point_inside(p, polygon, ln):
                 print('location[' + str(p) + '][' + str(index) + ']: ', tzids[polygon_index])
                 print(datetime.datetime.now() - now)
                 break
